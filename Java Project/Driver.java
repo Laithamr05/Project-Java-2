@@ -1,4 +1,3 @@
-
 //Laith Amro
 //1230018
 //Dr. Mamoun Nawahda
@@ -164,32 +163,24 @@ public class Driver { // the main class for managing the stock system
 			StockItem item = stock.getItems().get(i); // getting the current item
 			if (item instanceof Electronic) { // if the item is an Electronic
 				Electronic electronic = (Electronic) item; // casting the item to an Electronic
-				if (electronic.getDiscount() > 0) { // if the item has a discount
-					System.out.println("Brand: " + electronic.getBrand() + ", Type: " + electronic.getType() // printing
-																												// the
-																												// discounted
-																												// item
-																												// details
-							+ ", Price after discount: " + electronic.getPrice() * (1 - electronic.getDiscount()));
+				if (electronic.getDiscount() > 0) { // if
+					// the item has a discount
+					System.out.println(electronic); // printing the discounted electronic item
 				}
 			}
 		}
 	}
 
 	public static void sortItemsByBrand(Stock stock) { // method to sort items by brand in descending order
-		stock.getItems().sort((a, b) -> b.getBrand().compareTo(a.getBrand())); // sorting the items by brand
-		System.out.println("Items sorted by brand (descending):"); // message confirming sorting
-		for (int i = 0; i < stock.getItems().size(); i++) { // looping through sorted items
-			System.out.println(stock.getItems().get(i)); // printing each sorted item
-		}
+		stock.getItems().sort(Comparator.comparing(StockItem::getBrand).reversed()); // sorting by brand in descending
+																						// order
+		System.out.println("Items sorted by brand (descending)."); // confirming sort operation
 	}
 
 	public static void sortItemsByPrice(Stock stock) { // method to sort items by price in descending order
-		stock.getItems().sort(Comparator.comparingDouble(StockItem::getPrice).reversed()); // sorting the items by price
-		System.out.println("Items sorted by price (descending):"); // message confirming sorting
-		for (int i = 0; i < stock.getItems().size(); i++) { // looping through sorted items
-			System.out.println(stock.getItems().get(i)); // printing each sorted item
-		}
+		stock.getItems().sort(Comparator.comparing(StockItem::getPrice).reversed()); // sorting by price in descending
+																						// order
+		System.out.println("Items sorted by price (descending)."); // confirming sort operation
 	}
 
 	public static void printItemsWithDiscount(Stock stock, double discount) { // method to print items with a specific
@@ -197,7 +188,7 @@ public class Driver { // the main class for managing the stock system
 		for (int i = 0; i < stock.getItems().size(); i++) { // looping through each item in the stock
 			StockItem item = stock.getItems().get(i); // getting the current item
 			if (item.getDiscount() == discount) { // if the item has the specified discount
-				System.out.println(item); // printing the item with the specified discount
+				System.out.println(item); // printing the item
 			}
 		}
 	}
@@ -209,4 +200,5 @@ public class Driver { // the main class for managing the stock system
 			System.out.println(clonedItems.get(i)); // printing each cloned item
 		}
 	}
+
 }
