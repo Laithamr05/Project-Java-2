@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -172,15 +173,31 @@ public class Driver { // the main class for managing the stock system
 	}
 
 	public static void sortItemsByBrand(Stock stock) { // method to sort items by brand in descending order
-		stock.getItems().sort(Comparator.comparing(StockItem::getBrand).reversed()); // sorting by brand in descending
-																						// order
-		System.out.println("Items sorted by brand (descending)."); // confirming sort operation
+		Collections.sort(stock.getItems(), new Comparator<StockItem>() {
+			@Override
+			public int compare(StockItem item1, StockItem item2) {
+				return item1.getBrand().compareTo(item2.getBrand()); // sorting by brand in ascending order
+			}
+		});
+		Collections.reverse(stock.getItems()); // reversing the list to make it descending order
+		System.out.println("Items sorted by brand (descending):");
+		for (int i = 0; i < stock.getItems().size(); i++) { // using a for loop to print sorted items
+			System.out.println(stock.getItems().get(i));
+		}
 	}
 
 	public static void sortItemsByPrice(Stock stock) { // method to sort items by price in descending order
-		stock.getItems().sort(Comparator.comparing(StockItem::getPrice).reversed()); // sorting by price in descending
-																						// order
-		System.out.println("Items sorted by price (descending)."); // confirming sort operation
+		Collections.sort(stock.getItems(), new Comparator<StockItem>() {
+			@Override
+			public int compare(StockItem item1, StockItem item2) {
+				return Double.compare(item1.getPrice(), item2.getPrice()); // sorting by price in ascending order
+			}
+		});
+		Collections.reverse(stock.getItems()); // reversing the list to make it descending order
+		System.out.println("Items sorted by price (descending):");
+		for (int i = 0; i < stock.getItems().size(); i++) { // using a for loop to print sorted items
+			System.out.println(stock.getItems().get(i));
+		}
 	}
 
 	public static void printItemsWithDiscount(Stock stock, double discount) { // method to print items with a specific
